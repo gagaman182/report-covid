@@ -17,15 +17,16 @@
           exact
         >
           <v-list-item-action>
-            <v-icon class="yellow--text">{{ item.icon }}</v-icon>
+            <v-icon class="yellow--text" size="25">{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <!-- <h1 class="title">
               <v-list-item-title v-text="item.title" />
             </h1> -->
-            <h3 class="white--text">
+            <v-list-item-title v-text="item.title" class="white--text" />
+            <!-- <h3 class="white--text">
               {{ item.title }}
-            </h3>
+            </h3> -->
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -41,18 +42,26 @@
       <!-- <v-btn icon @click.stop="fixed = !fixed">
         <v-icon>mdi-minus</v-icon>
       </v-btn> -->
-      <!-- <v-toolbar-title v-text="title" /> -->
+      <v-toolbar-title v-text="title" class="texthead" />
 
-      <h2 class="texthead">
+      <!-- <h2 class="texthead">
         ระบบบันทึกข้อมูลผู้สัมผัสเสี่ยงในสถานพยาบาล :
         กรณีพบผู้ติดเชื้อในสถานพยาบาล
-      </h2>
+      </h2> -->
       <v-spacer />
       <!-- <v-btn icon @click.stop="rightDrawer = !rightDrawer">
         <v-icon>mdi-menu</v-icon>
       </v-btn> -->
     </v-app-bar>
+
     <v-main>
+      <v-system-bar dark color="primary">
+        <v-spacer></v-spacer>
+
+        <v-icon>mdi-calendar-range </v-icon>{{ datenow }}
+        <v-icon>mdi-clock-time-five-outline </v-icon> {{ timenow }}
+      </v-system-bar>
+
       <v-container>
         <nuxt />
       </v-container>
@@ -77,9 +86,11 @@
 export default {
   data() {
     return {
+      datenow: new Date().toISOString().substr(0, 10),
+      timenow: new Date().toString().substr(16, 5),
       clipped: true,
       drawer: true,
-      fixed: false,
+      fixed: true,
       items: [
         {
           icon: 'mdi-account-alert-outline ',
@@ -99,8 +110,10 @@ export default {
       ],
       miniVariant: false,
       right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js',
+      rightDrawer: true,
+      title:
+        'ระบบบันทึกข้อมูลผู้สัมผัสเสี่ยงในสถานพยาบาล : กรณีพบผู้ติดเชื้อในสถานพยาบาล',
+      collapseOnScroll: true,
     }
   },
 }
