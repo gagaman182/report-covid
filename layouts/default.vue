@@ -6,8 +6,22 @@
       :clipped="clipped"
       fixed
       app
-      color="#1f6f8b"
+      color="#4a47a3"
     >
+      <v-card class="mx-auto" max-width="344" outlined color="#5b6d5b ">
+        <v-list-item three-line>
+          <v-list-item-content>
+            <v-list-item-title class="headline mb-2 yellow--text">
+              Risk Contact
+            </v-list-item-title>
+          </v-list-item-content>
+          <!-- <v-list-item-avatar tile size="50" color="grey"></v-list-item-avatar> -->
+          <!-- <v-list-item-avatar>
+            <img src="@/assets/covid19main.jpg" />
+          </v-list-item-avatar> -->
+          <img src="@/assets/65.jpg" class="img-fluid rounded-circle" />
+        </v-list-item>
+      </v-card>
       <v-list>
         <v-list-item
           v-for="(item, i) in items"
@@ -31,8 +45,9 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" color="#99a8b2" fixed app>
+    <v-app-bar :clipped-left="clipped" color="#709fb0" fixed app>
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
+      <!-- ปุ่มลูกศร -->
       <v-btn icon @click.stop="miniVariant = !miniVariant">
         <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
       </v-btn>
@@ -42,7 +57,7 @@
       <!-- <v-btn icon @click.stop="fixed = !fixed">
         <v-icon>mdi-minus</v-icon>
       </v-btn> -->
-      <v-toolbar-title v-text="title" class="texthead" />
+      <v-toolbar-title v-text="title" class="yellow--text" />
 
       <!-- <h2 class="texthead">
         ระบบบันทึกข้อมูลผู้สัมผัสเสี่ยงในสถานพยาบาล :
