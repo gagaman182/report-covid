@@ -3,7 +3,9 @@
     <v-flex xs12 md12>
       <v-card class="mx-auto">
         <v-card-title class="subheadline texthead font-weight-bold">
-          รายงานพบผู้ติดเชื้อ
+          <v-icon class="subheadline texthead font-weight-bold"
+            >mdi-account-alert-outline </v-icon
+          >&nbsp; รายงานพบผู้ติดเชื้อ
         </v-card-title>
 
         <v-alert
@@ -40,14 +42,25 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   components: {},
   data: () => ({
-    ancovid: [
-      { num: '1', date: '12-01-2564', an: '1/49', ward: 'อายุรกรรมหญิง 230' },
-      { num: '2', date: '06-03-2564', an: '2/68', ward: 'อายุรกรรมชาย 210' },
-    ],
+    ancovid: [],
   }),
+  mounted() {
+    this.fetch_covid()
+  },
+  methods: {
+    //แสดงข้อมูลร้านค้า
+    async fetch_covid() {
+      await axios
+        .get(`${this.$axios.defaults.baseURL}covid.php`)
+        .then((response) => {
+          this.ancovid = response.data
+        })
+    },
+  },
 }
 </script>
 <style scoped>

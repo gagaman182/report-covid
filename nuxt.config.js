@@ -82,7 +82,14 @@ export default {
      ** Axios module configuration
      ** See https://axios.nuxtjs.org/options
      */
-    axios: {},
+    axios: {
+        //home
+        baseURL: 'http://localhost/report-covid/backend/',
+        //server 5.1
+        // baseURL: 'http://192.168.5.1/dsonline/backend/',
+        //takis
+        // baseURL: 'http://61.19.25.207/dsonline/backend/',
+    },
     /*
      ** vuetify module configuration
      ** https://github.com/nuxt-community/vuetify-module
