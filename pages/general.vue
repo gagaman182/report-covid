@@ -2,19 +2,21 @@
   <v-layout row align-center>
     <v-flex xs12 md12>
       <v-card class="mx-auto">
-        <v-card-title class="subheadline texthead"> ข้อมูลทั่วไป </v-card-title>
+        <v-card-title class="subheadline texthead font-weight-bold">
+          ข้อมูลทั่วไป
+        </v-card-title>
       </v-card>
     </v-flex>
     <v-flex xs12 md12>
       <v-card class="mx-auto">
-        <v-card-title class="subheadline texthead">
+        <v-card-title class="subheadline texthead font-weight-bold">
           ประวัติเสี่ยง
         </v-card-title>
       </v-card>
     </v-flex>
     <v-flex xs12 md12>
       <v-card class="mx-auto">
-        <v-card-title class="subheadline texthead">
+        <v-card-title class="subheadline texthead font-weight-bold">
           อาการและอาการแสดง
         </v-card-title>
       </v-card>

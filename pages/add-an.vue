@@ -3,7 +3,7 @@
     <v-flex xs12 md12>
       <v-card class="mx-auto">
         <v-card-title class="subheadline texthead font-weight-bold">
-          เฝ้าระวังจนครบ 14 วัน
+          เพิ่มผู้ติดเชื้อ
         </v-card-title>
       </v-card>
     </v-flex>
