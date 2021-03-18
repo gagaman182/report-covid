@@ -37,7 +37,7 @@
           </v-col>
         </v-row>
         <v-divider></v-divider>
-        <v-row>
+        <v-row justify="center">
           <v-col cols="12">
             <v-data-table
               height="40vh"
@@ -46,36 +46,79 @@
               :search="search"
               :items="complex.items"
               class="elevation-1 display-2"
-              @click:row="handleClick"
             >
               <template v-slot:body="{ items }">
                 <tbody>
-                  <tr v-for="row in items">
-                    <td v-for="col in row">
+                  <tr v-for="row in items" @click="selectItem(row)">
+                    <!-- <td v-for="col in row">
                       {{ col }}
+                    </td> -->
+                    <td>
+                      {{ row.num }}
+                    </td>
+                    <td>
+                      {{ row.date }}
+                    </td>
+                    <td>
+                      {{ row.an }}
+                    </td>
+                    <td>
+                      {{ row.ward }}
                     </td>
                   </tr>
                 </tbody>
               </template>
+              <!-- <template slot="items" slot-scope="props">
+                <tr @click="showAlert(props.item)">
+                  <td>{{ props.item.nums }}</td>
+                  <td>{{ props.item.date }}</td>
+                  <td>{{ props.item.an }}</td>
+                  <td>{{ props.item.ward }}</td>
+                </tr></template
+              > -->
             </v-data-table>
           </v-col>
 
-          <v-col cols="12" sm="6">
+          <v-col cols="12" sm="3" justify="center">
+            <!-- <v-text-field
+              v-model="date"
+              label="วันที่"
+              outlined
+              v-if="textboxshow"
+            ></v-text-field> -->
+
+            <v-date-picker
+              v-model="date"
+              color="#7579e7"
+              locale="th-TH"
+              v-if="textboxshow"
+            ></v-date-picker>
+          </v-col>
+
+          <v-col cols="12" sm="4">
             <v-text-field
-              v-model="id"
-              label="ไอดี"
+              v-model="an"
+              label="AN"
               outlined
               v-if="textboxshow"
             ></v-text-field>
           </v-col>
-
-          <v-col cols="12" sm="6">
-            <v-text-field
-              v-model="name"
-              label="ระดับการศีกษา"
+          <v-col cols="12" sm="4">
+            <!-- <v-text-field
+              v-model="ward"
+              label="หอผู้ป่วย"
               outlined
               v-if="textboxshow"
-            ></v-text-field>
+            ></v-text-field> -->
+            <v-select
+              v-if="textboxshow"
+              :items="ward_list"
+              v-model="ward"
+              item-text="HALFPLACE"
+              item-value="HALFPLACE"
+              label="หอผู้ป่วย"
+              outlined
+            ></v-select>
           </v-col>
 
           <v-col cols="12" align="end">
@@ -135,7 +178,7 @@ export default {
       selected: [],
       headers: [
         {
-          text: 'ลำดับที่',
+          text: 'รายการที่',
           value: 'num',
         },
         {
@@ -154,8 +197,10 @@ export default {
       items: [],
     },
     num: '',
-    id: '',
-    name: '',
+    date: new Date().toISOString().substr(0, 9),
+    an: '',
+    ward: '',
+    ward_list: '',
     textboxshow: '',
     btneditandremove: false,
     btnmain: true,
@@ -164,9 +209,10 @@ export default {
   }),
   mounted() {
     this.fetch_covid()
+    this.fetch_ward()
   },
   methods: {
-    //แสดงข้อมูลร้านค้า
+    //แสดงข้อมูลผู้ป่วย covid
     async fetch_covid() {
       await axios
         .get(`${this.$axios.defaults.baseURL}covid.php`)
@@ -174,18 +220,26 @@ export default {
           this.complex.items = response.data
         })
     },
+    //แสดงข้อมูล ward
+    async fetch_ward() {
+      await axios
+        .get(`${this.$axios.defaults.baseURL}ward_list.php`)
+        .then((response) => {
+          this.ward_list = response.data
+        })
+    },
     // click table
-    handleClick(value) {
-      // this.dialog = true
-      // this.$emit('show-dialog', { dialog: this.dialog, storeid: value.storeid })
+    selectItem(value) {
       this.num = value.num
-      this.id = value.education
-      this.name = value.name
+      this.date = value.date
+      this.an = value.an
+      this.ward = value.ward
       this.btneditandremove = true
       this.textboxshow = true
       this.btncancel = true
       this.btnadd = false
     },
+
     //show textbox and btn
     showadd() {
       this.btnadd = true
@@ -195,9 +249,7 @@ export default {
     },
     //เพิ่มข้อมูล
     adddata() {
-      let type = 'education'
-
-      if (!this.id || !this.name) {
+      if (!this.date || !this.an || !this.ward) {
         this.$swal({
           title: 'แจ้งเตือน',
           text: 'ระบุข้อมูลไม่ครบ',
@@ -206,11 +258,10 @@ export default {
         })
       } else {
         axios
-          .post(`${this.$axios.defaults.baseURL}t_add.php`, {
-            num: this.num,
-            id: this.id,
-            name: this.name,
-            type: type,
+          .post(`${this.$axios.defaults.baseURL}add_an.php`, {
+            date: this.date,
+            an: this.an,
+            ward: this.ward,
           })
           .then((response) => {
             this.message = response.data
@@ -237,8 +288,7 @@ export default {
 
     //ลบ ข่อมูล
     removedata() {
-      let type = 'education'
-      if (!this.id) {
+      if (!this.an) {
         this.$swal({
           title: 'แจ้งเตือน',
           text: 'ไม่พบข้อมูล',
@@ -248,7 +298,7 @@ export default {
       } else {
         this.$swal({
           title: 'คุณแน่ใจว่าต้องการลบข้อมูลนี้?',
-          text: 'ไอดี: ' + this.id,
+          text: 'รายการที่: ' + this.num,
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#51adcf',
@@ -258,10 +308,8 @@ export default {
         }).then((result) => {
           if (result.isConfirmed) {
             axios
-              .put(`${this.$axios.defaults.baseURL}t_delete.php`, {
+              .put(`${this.$axios.defaults.baseURL}delete_an.php`, {
                 num: this.num,
-                id: this.id,
-                type: type,
               })
               .then((response) => {
                 this.message = response.data
@@ -290,8 +338,7 @@ export default {
     },
     //แก้ไข ข้อมูล
     updatedata: function () {
-      let type = 'education'
-      if (!this.id) {
+      if (!this.an) {
         this.$swal({
           title: 'แจ้งเตือน',
           text: 'ไม่พบข้อมูล',
@@ -300,11 +347,11 @@ export default {
         })
       } else {
         axios
-          .put(`${this.$axios.defaults.baseURL}t_update.php`, {
+          .put(`${this.$axios.defaults.baseURL}update_an.php`, {
             num: this.num,
-            id: this.id,
-            name: this.name,
-            type: type,
+            date: this.date,
+            an: this.an,
+            ward: this.ward,
           })
           .then((response) => {
             this.message = response.data
@@ -334,8 +381,9 @@ export default {
       this.textboxshow = false
       this.btnmain = true
       this.btneditandremove = false
-      this.id = ''
-      this.name = ''
+      this.date = ''
+      this.an = ''
+      this.ward = ''
     },
   },
 }

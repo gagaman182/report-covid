@@ -3,15 +3,8 @@
    
 	 include 'conn.php';
 
- 
 
- $sql = "select
- num,
-
-date,
-  an,
-  ward
- from covid";
+ $sql = "SELECT * from ward where PT_PLACE_TYPE_CODE = 2 ";
 
 
 $return_arr = array();

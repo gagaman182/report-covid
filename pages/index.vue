@@ -16,7 +16,7 @@
           color="#ff005c"
           icon="mdi-clock-fast"
           border="left"
-          >ลำดับที่ : {{ item.num }}
+          >รายการที่ : {{ item.num }}
           <v-row>
             <v-col cols="12" class="text-center"> </v-col>
             <v-col cols="4" class="text-center">
