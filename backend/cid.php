@@ -5,12 +5,7 @@
 
  
 
- $sql = "select
- num,
- date,
- an,
- ward
- from covid";
+ $sql = "SELECT cid from pis WHERE status = 'Y' ";
 
 
 $return_arr = array();
