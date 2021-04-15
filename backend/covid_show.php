@@ -7,7 +7,7 @@
 
  $sql = "select
  num,
-date,
+ DATE_FORMAT(date,'%d-%m-%Y') AS date,
  an,
  ward
  from covid";

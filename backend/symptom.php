@@ -5,12 +5,7 @@
 
  
 
- $sql = "select
- num,
-date,
- an,
- ward
- from covid";
+ $sql = "SELECT * from symptom";
 
 
 $return_arr = array();

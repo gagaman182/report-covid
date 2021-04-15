@@ -55,7 +55,7 @@ export default {
     //แสดงข้อมูลร้านค้า
     async fetch_covid() {
       await axios
-        .get(`${this.$axios.defaults.baseURL}covid.php`)
+        .get(`${this.$axios.defaults.baseURL}covid_show.php`)
         .then((response) => {
           this.ancovid = response.data
         })

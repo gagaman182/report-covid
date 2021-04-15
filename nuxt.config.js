@@ -5,7 +5,7 @@ export default {
 
     googleFonts: {
         families: {
-            Kanit: true,
+            // Kanit: true,
             Prompt: true,
 
             Kanit: {
@@ -34,7 +34,8 @@ export default {
      */
     head: {
         titleTemplate: '%s - ' + process.env.npm_package_name,
-        title: process.env.npm_package_name || '',
+        title: process.env.npm_package_name ||
+            'ระบบบันทึกข้อมูลผู้สัมผัสเสี่ยงในสถานพยาบาล : กรณีพบผู้ติดเชื้อในสถานพยาบาล',
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -61,7 +62,7 @@ export default {
      ** Plugins to load before mounting the App
      ** https://nuxtjs.org/guide/plugins
      */
-    plugins: [],
+    plugins: [{ src: '~/plugins/vue-good-table', ssr: false }],
     /*
      ** Auto import components
      ** See https://nuxtjs.org/api/configuration-components
@@ -78,7 +79,14 @@ export default {
         // Doc: https://axios.nuxtjs.org/usage
         '@nuxtjs/axios',
         'vue-sweetalert2/nuxt',
+        // 'nuxt-basic-auth-module',
     ],
+
+    // basic: {
+    //     name: 'u10682',
+    //     pass: 'p10682',
+    // },
+
     /*
      ** Axios module configuration
      ** See https://axios.nuxtjs.org/options
@@ -91,6 +99,7 @@ export default {
         //takis
         // baseURL: 'http://61.19.25.207/dsonline/backend/',
     },
+
     /*
      ** vuetify module configuration
      ** https://github.com/nuxt-community/vuetify-module

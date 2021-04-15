@@ -26,6 +26,13 @@
       </v-card>
       <v-list>
         <!-- user menu -->
+        <v-list-item-content>
+          <p
+            class="yellow--text font-weight-bold ma-2 text-decoration-underline"
+          >
+            ผู้ใช้งานทั่วไป
+          </p>
+        </v-list-item-content>
         <v-list-item
           v-for="(item, i) in items"
           :key="i"
@@ -37,14 +44,20 @@
             <v-icon class="yellow--text" size="25">{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title
+            <!-- <v-list-item-title
               v-text="item.title"
-              class="white--text font-weight-bold"
-            />
+              class="white--text font-weight-bold ma-2"
+            /> -->
+            <p class="white--text font-weight-bold ma-2">{{ item.title }}</p>
           </v-list-item-content>
         </v-list-item>
         <!-- admin menu -->
         <v-divider color="white"></v-divider>
+        <v-list-item-content>
+          <p class="red--text font-weight-bold ma-2 text-decoration-underline">
+            เจ้าหน้าที่
+          </p>
+        </v-list-item-content>
         <v-list-item
           v-for="(item, i) in admins"
           :key="i"
@@ -56,10 +69,11 @@
             <v-icon class="pink--text" size="25">{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title
+            <!-- <v-list-item-title
               v-text="item.title"
               class="white--text font-weight-bold"
-            />
+            /> -->
+            <p class="white--text font-weight-bold ma-2">{{ item.title }}</p>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -78,8 +92,9 @@
       </v-btn> -->
       <v-toolbar-title
         v-text="title"
-        class="yellow--text headline font-weight-bold"
+        class="yellow--text headline font-weight-bold ma-"
       />
+      <!-- <p class="yellow--text headline font-weight-bold ma-2">{{ title }}</p> -->
 
       <!-- <h2 class="texthead">
         ระบบบันทึกข้อมูลผู้สัมผัสเสี่ยงในสถานพยาบาล :
@@ -114,7 +129,7 @@
 export default {
   data() {
     return {
-      datenow: new Date().toISOString().substr(0, 10),
+      datenow: new Date().toLocaleString().substr(0, 10),
       timenow: new Date().toString().substr(16, 5),
       clipped: true,
       drawer: true,
@@ -141,6 +156,11 @@ export default {
           icon: 'mdi-account-check  ',
           title: 'เพิ่มผู้ติดเชื้อ',
           to: '/add-an',
+        },
+        {
+          icon: 'mdi-form-textbox    ',
+          title: 'รายชื่อผู้สัมผัส',
+          to: '/detail',
         },
       ],
       miniVariant: false,
