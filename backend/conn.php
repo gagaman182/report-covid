@@ -7,11 +7,17 @@
 // $dbname = "leave";
 // $port = "3333";
 // // home
-$servername = "localhost";
+// $servername = "localhost";
+// $username = "root";
+// $password = "123456789";
+// $dbname = "contact-covid";
+// $port = "3306";
+
+// hospital
+$servername = "192.168.4.3";
 $username = "root";
-$password = "123456789";
+$password = "1234";
 $dbname = "contact-covid";
-$port = "3306";
 
 
 

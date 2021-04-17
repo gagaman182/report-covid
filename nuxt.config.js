@@ -93,7 +93,9 @@ export default {
      */
     axios: {
         //home
-        baseURL: 'http://localhost/report-covid/backend/',
+        // baseURL: 'http://localhost/report-covid/backend/',
+        //4.3
+        baseURL: 'http://192.168.4.3/webapp/report-covid/backend/',
         //server 5.1
         // baseURL: 'http://192.168.5.1/dsonline/backend/',
         //takis
@@ -126,4 +128,8 @@ export default {
      ** See https://nuxtjs.org/api/configuration-build/
      */
     build: {},
+    // setให้สามารถ run คำสั่ง npm run generate แล้วได้ ไฟล์ dist เอาข้างในไป ใส่ใน path ที่เราต้องการ
+    router: {
+        base: '/webapp/report-covid',
+    },
 }
