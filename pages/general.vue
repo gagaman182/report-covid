@@ -105,7 +105,7 @@
                             <v-select
                               v-model="an"
                               :items="an"
-                              label="สัมผัส AN"
+                              label="สัมผัส HN หรือ AN"
                               filled
                               outlined
                             ></v-select>

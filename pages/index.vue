@@ -26,12 +26,12 @@
             </v-col>
             <v-col cols="4" class="text-center">
               <v-card-text class="headline font-weight-bold">
-                AN : {{ item.an }}
+                HN หรือ AN : {{ item.an }}
               </v-card-text></v-col
             >
             <v-col cols="4" class="text-center">
               <v-card-text class="headline font-weight-bold">
-                หอผู้ป่วย : {{ item.ward }}
+                หน่วยบริการ : {{ item.ward }}
               </v-card-text>
             </v-col>
           </v-row>

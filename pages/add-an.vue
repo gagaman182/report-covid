@@ -79,19 +79,13 @@
                 <v-col cols="12" sm="4">
                   <v-text-field
                     v-model="an"
-                    label="AN"
+                    label="HN หรือ AN"
                     outlined
                     v-if="textboxshow"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="4">
-                  <!-- <v-text-field
-              v-model="ward"
-              label="หอผู้ป่วย"
-              outlined
-              v-if="textboxshow"
-            ></v-text-field> -->
-                  <v-select
+                  <!-- <v-select
                     v-if="textboxshow"
                     :items="ward_list"
                     v-model="ward"
@@ -99,7 +93,17 @@
                     item-value="HALFPLACE"
                     label="หอผู้ป่วย"
                     outlined
-                  ></v-select>
+                  ></v-select> -->
+                  <v-autocomplete
+                    v-if="textboxshow"
+                    v-model="ward"
+                    :items="ward_list"
+                    label="หน่วยบริการ"
+                    color="blue"
+                    filled
+                    outlined
+                  >
+                  </v-autocomplete>
                 </v-col>
 
                 <v-col cols="12" align="end">
@@ -211,11 +215,11 @@ export default {
           value: 'date',
         },
         {
-          text: 'AN',
+          text: 'HN หรือ AN',
           value: 'an',
         },
         {
-          text: 'หอผู้ป่วย',
+          text: 'หน่วยบริการ',
           value: 'ward',
         },
       ],
@@ -224,6 +228,7 @@ export default {
     num: '',
     date: '',
     an: '',
+    wardall: '',
     ward: '',
     ward_list: '',
     textboxshow: false,
@@ -286,11 +291,19 @@ export default {
         })
     },
     //แสดงข้อมูล ward
+    // async fetch_ward() {
+    //   await axios
+    //     .get(`${this.$axios.defaults.baseURL}ward_list.php`)
+    //     .then((response) => {
+    //       this.ward_list = response.data
+    //     })
+    // },
     async fetch_ward() {
       await axios
         .get(`${this.$axios.defaults.baseURL}ward_list.php`)
         .then((response) => {
-          this.ward_list = response.data
+          this.wardall = response.data
+          this.ward_list = this.wardall.map((item) => item.HALFPLACE)
         })
     },
     // click table

@@ -30,7 +30,7 @@
           <p
             class="yellow--text font-weight-bold ma-2 text-decoration-underline"
           >
-            ผู้ใช้งานทั่วไป
+            เจ้าหน้าที่ที่สัมผัสผู้ป่วย
           </p>
         </v-list-item-content>
         <v-list-item
@@ -55,7 +55,7 @@
         <v-divider color="white"></v-divider>
         <v-list-item-content>
           <p class="red--text font-weight-bold ma-2 text-decoration-underline">
-            เจ้าหน้าที่
+            ทีมควบคุมโรค SRRT
           </p>
         </v-list-item-content>
         <v-list-item
@@ -120,7 +120,10 @@
     </v-main>
 
     <v-footer :absolute="!fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+      <span
+        >&copy;
+        {{ new Date().getFullYear() }} งานป้องกันควบคุมโรคและระบาดวิทยา</span
+      >
     </v-footer>
   </v-app>
 </template>

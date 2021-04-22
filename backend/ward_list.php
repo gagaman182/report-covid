@@ -4,9 +4,9 @@
 	 include 'conn.php';
 
 
- $sql = "SELECT * from ward where PT_PLACE_TYPE_CODE = 2 ";
+//  $sql = "SELECT * from ward where PT_PLACE_TYPE_CODE = 2 ";
 
-
+$sql = "SELECT HALFPLACE from ward where PT_PLACE_TYPE_CODE IN ('1','2') ";
 $return_arr = array();
 
 if ($result = mysqli_query( $conn, $sql )){
